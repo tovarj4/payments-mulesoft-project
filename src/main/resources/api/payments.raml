@@ -1,0 +1,117 @@
+#%RAML 1.0
+title: payments
+version: 1.0
+
+types:
+  Partner: !include Types/Partner.raml
+  Subscriber: !include Types/Subscriber.raml
+  Fee: !include Types/Fee.raml
+/partners:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Partner[]
+            examples:
+              output: !include Examples/PartnerExamples.raml
+  /{id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: Partner
+              example:
+                output: 
+                ID: 1
+                name: name
+                phone: phone
+                status: true
+    
+  post:
+    body:
+      application/json:
+        type: Partner
+        examples:
+          input: !include Examples/PartnerExampleWithoutID.raml
+    responses:
+      201:
+        body:
+          applcation/json:
+            example:
+              message: Partner added
+
+/subscriber:
+  get:
+    description: Get All Subscribers
+    responses:
+      200:
+        body:
+          application/json:
+            examples:
+              output: !include Examples/SubscriberExamples.raml
+  /{id}:
+    get:
+      description: Get Subscriber by ID
+      responses:
+        200:
+          body:
+            application/json:
+              examples:
+               output: !include Examples/SubscriberExample.raml
+  post:
+    description: Add Subscriber
+    body:
+      application/json:
+        type: Subscriber
+        examples:
+          input: !include Examples/SubscriberWithoutIdExample.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: Success
+          
+  patch:
+    description: Update Subsciber Info
+    body:
+      application/json:
+        type: Subscriber
+        examples:
+          input: !include Examples/SubscriberExample.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: Success
+              
+/fees:
+  get:
+    description: Get all Fees
+    responses:
+      200:
+        body:
+          application/json:
+            examples:
+              output: !include Examples/FeesExamples.raml
+              
+  /{subscriber_id}:
+    get:
+      description: Get Fees by subscriber
+      responses:
+        200:
+          body:
+            application/json:
+              examples:
+                output: !include Examples/FeesExamples.raml
+                
+  post:
+    description: Add Fee
+    body:
+      application/json:
+        type: Fee
+        examples:
+          input: !include Examples/FeeWithoutIdExample.raml

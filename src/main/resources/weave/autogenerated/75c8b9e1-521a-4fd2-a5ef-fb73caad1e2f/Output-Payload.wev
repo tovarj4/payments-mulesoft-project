@@ -1,0 +1,4 @@
+%dw 2.0
+
+type auto_75c8b9e1_521a_4fd2_a5ef_fb73caad1e2f_Output_Payload = Array<{|  id: Number,   name: String,   phone: String,   status: Boolean|}>
+
